@@ -115,3 +115,22 @@ function gameObject() {
     }
 }
 
+// function homeTeamName(){
+//   return gameObject()['home']['teamName']
+// }
+
+// console.log(homeTeamName())
+
+function findAPlayer()
+
+function numPointsScored(playerName) {
+  let object = gameObject()[playerName]['points'] 
+    return object
+}
+//or is it the for... in iterator?
+//  for (const property in gameObject) {
+//    return(`${property}: ${gameObject[property]}`);
+//  }
+numPointsScored('Jeff Adrien')
+
+console.log(gameObject(numPointsScored()))
