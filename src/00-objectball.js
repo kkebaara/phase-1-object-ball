@@ -115,22 +115,72 @@ function gameObject() {
     }
 }
 
-// function homeTeamName(){
-//   return gameObject()['home']['teamName']
-// }
+function homeTeamName(){
+  return gameObject()['home']['teamName']
+}
 
-// console.log(homeTeamName())
-
-function findAPlayer()
+function someFunction() {
+    const object = gameObject();
+    return object.home
+}
+someFunction()
 
 function numPointsScored(playerName) {
-  let object = gameObject()[playerName]['points'] 
-    return object
+    const foundPlayer = findPlayer(playerName)
+    return foundPlayer.points
+    // const object = gameObject()
+    // const isHomePlayer = object.home.players[playerName]
+    // const isAwayPlayer = object.away.players[playerName]
+    
+    // if (isHomePlayer) {
+    //     return isHomePlayer.points
+    // }
+    // else {
+    //     return isAwayPlayer.points
+    // }
+    //this is the ternary version (not working?):
+    // isHomePlayer ? isHomePlayer.points : isAwayPlayer.points
+    //debugger
 }
-//or is it the for... in iterator?
-//  for (const property in gameObject) {
-//    return(`${property}: ${gameObject[property]}`);
-//  }
-numPointsScored('Jeff Adrien')
+numPointsScored('Ben Gordon')
 
-console.log(gameObject(numPointsScored()))
+function showSize(playerName) {
+    const object = gameObject()
+    const isHomePlayer = object.home.players[playerName]
+    
+    
+    if (isHomePlayer) {
+        return isHomePlayer.shoe
+    }
+    else {
+        const isAwayPlayer = object.away.players[playerName]
+        return isAwayPlayer.shoe
+    }
+    
+}
+//showSize('Ben Gordon')
+
+function findPlayer(playerName){
+    const object = gameObject()
+    const isHomePlayer = object.home.players[playerName]
+    if (isHomePlayer) {
+        return isHomePlayer
+    }
+    else {
+        const isAwayPlayer = object.away.players[playerName]
+        return isAwayPlayer
+    }   
+}
+//findPlayer('Ben Gordon')
+
+function teamColors(teamName) {
+    const object = gameObject()
+    if (object.home.teamName === teamName) {
+        return object.home.colors
+    }
+    else {
+        return object.away.colors
+    }
+}
+
+teamColors('Charlotte Hornets')
