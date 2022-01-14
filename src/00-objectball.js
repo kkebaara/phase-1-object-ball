@@ -115,23 +115,23 @@ function gameObject() {
     }
 }
 
-function homeTeamName(){
-  return gameObject()['home']['teamName']
-}
+// function homeTeamName(){
+//   return gameObject()['home']['teamName']
+// }
 
-function someFunction() {
-    const object = gameObject();
-    return object.home
-}
-someFunction()
+// function someFunction() {
+//     const object = gameObject();
+//     return object.home
+// }
+// someFunction()
 
 function numPointsScored(playerName) {
-    const foundPlayer = findPlayer(playerName)
+    const foundPlayer = playerStats(playerName)
     return foundPlayer.points
     // const object = gameObject()
     // const isHomePlayer = object.home.players[playerName]
     // const isAwayPlayer = object.away.players[playerName]
-    
+    //below is the original helper function to decide if a player is home or away
     // if (isHomePlayer) {
     //     return isHomePlayer.points
     // }
@@ -142,7 +142,7 @@ function numPointsScored(playerName) {
     // isHomePlayer ? isHomePlayer.points : isAwayPlayer.points
     //debugger
 }
-numPointsScored('Ben Gordon')
+//numPointsScored('Ben Gordon')
 
 function showSize(playerName) {
     const object = gameObject()
@@ -160,7 +160,7 @@ function showSize(playerName) {
 }
 //showSize('Ben Gordon')
 
-function findPlayer(playerName){
+function playerStats(playerName){
     const object = gameObject()
     const isHomePlayer = object.home.players[playerName]
     if (isHomePlayer) {
@@ -171,7 +171,7 @@ function findPlayer(playerName){
         return isAwayPlayer
     }   
 }
-//findPlayer('Ben Gordon')
+//playerStats('Ben Gordon')
 
 function teamColors(teamName) {
     const object = gameObject()
@@ -182,5 +182,55 @@ function teamColors(teamName) {
         return object.away.colors
     }
 }
-
 teamColors('Charlotte Hornets')
+
+function playerNumbers(teamName) {
+    const object = gameObject();
+    for (let property in object) {
+        if (object[property].teamName === teamName) {
+            const arrtofPlayersObjects = Object.values(object[property].players)
+            return arrtofPlayersObjects.map((playerObject) => playerObject.number)
+            // const arryOfPlayerNames = Object.keys(object[property].players)
+            // arryOfPlayerNames.map((name) => {
+            //     return object[property].players[name].number
+                
+            }
+        }
+    }
+
+
+const teamNames = () => {
+    const object = gameObject()
+    const teamNamesArry = []
+    for (const property in object) {
+        teamNamesArry.push(object[property].teamName)
+    }
+    return teamNamesArry
+}
+teamNames()
+
+function bigShoeRebounds () {
+    const foundPlayer = findBiggestShoe()
+    //console.log(foundPlayer)
+    return foundPlayer.Rebounds
+}
+
+function findBiggestShoe() {
+    const object = gameObject()
+    const homeTeamPlayers = Object.values(object.home.players)
+    const awayTeamPlayers = Object.values(object.away.players)
+    const allPlayers = [...homeTeamPlayers, ...awayTeamPlayers]
+    //                      using the forEach method:
+    //let largest = allPlayers
+    // allPlayers.forEach(player => {
+    //     if (player.shoe > largest.shoe) {
+    //         largest = player
+    //     }
+    // })
+    //console.log(largest)
+    //                      using the sort method:
+    allPlayers.sort((a,b)=> (a.shoe < b.shoe ? 1 : -1))
+    //console.log(allPlayers)
+    return allPlayers[0]
+}
+bigShoeRebounds()
